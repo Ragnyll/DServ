@@ -1,0 +1,22 @@
+{
+  "name": "gserv",
+  "version": "1.0.0",
+  "description": "A Webserver that accepts requests from amazon alexa to automate a home network",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ragnyll/GServ.git"
+  },
+  "author": "Ragnyll",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ragnyll/GServ/issues"
+  },
+  "homepage": "https://github.com/Ragnyll/GServ#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
