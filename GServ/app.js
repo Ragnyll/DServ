@@ -4,8 +4,11 @@ var port = process.env.PORT || 3000; // use environment port or just default to 
 var app = express();
 var router = express.Router(); // route everyting through router
 
-// connect to mongodb
-mongoose.connect('mongodb://localhost:27017/beerlocker');
+// connect to mongodb. if it doesnt connecct after 10 seconds just quit
+mongoose.connect('mongodb://localhost:27017/beerlocker', function(err) {
+  if (err) throw err;
+});
+// TODO: add a keep alive to prevent connection closed
 
 app.use('/api', router); // router sits at the /api extension
 
