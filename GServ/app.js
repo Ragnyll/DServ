@@ -1,5 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 var Users = require('../models/users');
 var port = process.env.PORT || 3000; // use environment port or just default to 3000
 var app = express();
@@ -33,6 +34,9 @@ db.once('open', function() {
 });
 
 app.use('/api', router); // router sits at the /api extension
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 router.get('/', function(req, res) {
   res.json({message: 'Connecting to GServ'});
