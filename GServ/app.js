@@ -5,10 +5,16 @@ var app = express();
 var router = express.Router(); // route everyting through router
 
 // connect to mongodb. if it doesnt connecct after 10 seconds just quit
+// TODO: add a keep alive to prevent connection closed
 mongoose.connect('mongodb://localhost:27017/beerlocker', function(err) {
   if (err) throw err;
 });
-// TODO: add a keep alive to prevent connection closed
+// make sure that mongoose was able to connect
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('successfully connected to mongodb');
+});
 
 app.use('/api', router); // router sits at the /api extension
 
