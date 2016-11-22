@@ -41,7 +41,7 @@ router.get('/', function(req, res) {
 router.get('/users', function(req, res) {
   console.log('in the users route. trying to get all the users');
   User.find(function(err, users) {
-    if err {
+    if (err) {
       res.send(err);
     }
     res.json(users);
