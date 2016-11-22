@@ -38,6 +38,22 @@ router.get('/', function(req, res) {
   res.json({message: 'Connecting to GServ'});
 });
 
+var usersRoute = router.route('/users');
+usersRoute.post(function(req, res) {
+  var user = new User();
+
+  user.name = 'jim';
+  user.password = 'duck';
+  user.other = 'no';
+
+  user.save(function(err) {
+    if (err) {
+      res.send(err);
+      console.log('problem saving the result of the POST request');
+    }
+    res.json({message: 'your user was created', data: user });
+  });
+});
 
 // Get that server kickin
 app.listen(port, function() {
