@@ -2,8 +2,11 @@ var express = require('express');
 var mongoose = require('mongoose');
 var port = process.env.PORT || 3000; // use environment port or just default to 3000
 var app = express();
-
 var router = express.Router(); // route everyting through router
+
+// connect to mongodb
+mongoose.connect('mongodb://localhost:27017/beerlocker');
+
 app.use('/api', router); // router sits at the /api extension
 
 router.get('/', function(req, res) {
