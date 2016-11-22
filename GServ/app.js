@@ -13,8 +13,22 @@ mongoose.connect('mongodb://localhost:27017/beerlocker', function(err) {
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  console.log('Mongoose ready state:');
-  console.log(db.readyState);
+  switch (db.readyState) {
+    case 0:
+      console.log('Mongoose state: disconnected');
+      break;
+    case 1:
+      console.log('Mongoose state: connected');
+      break;
+    case 2:
+      console.log('Mongoose state: connecting');
+      break;
+    case 3:
+      console.log('Mongoose state: disconnecting');
+      break;
+    default:
+      console.log('Strange forces are at work here...');
+  }
 });
 
 app.use('/api', router); // router sits at the /api extension
