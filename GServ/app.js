@@ -1,16 +1,17 @@
 var express = require('express');
 var mongoose = require('mongoose');
-
+var port = process.env.PORT || 3000; // use environment port or just default to 3000
 var app = express();
-mongoose.connect('mongodb');
-app.get('/', function (req, res) {
-  res.send('Hello World!')
-})
 
-app.post('/', function (req, res) {
-  res.send('POST request to the homepage')
-})
+var router = express.Router(); // route everyting through router
+app.use('/api', router); // router sits at the /api extension
 
-app.listen(3000, function () {
-  console.log('GServ listening on port 3000!')
-})
+router.get('/', function(req, res) {
+  res.json({message: 'Connecting to GServ'});
+});
+
+
+// Get that server kickin
+app.listen(port, function() {
+  console.log('GServ listening on port ' + port)
+});
