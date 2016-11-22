@@ -13,7 +13,8 @@ mongoose.connect('mongodb://localhost:27017/beerlocker', function(err) {
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  console.log('successfully connected to mongodb');
+  console.log('Mongoose ready state:');
+  console.log(db.readyState);
 });
 
 app.use('/api', router); // router sits at the /api extension
