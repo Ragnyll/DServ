@@ -38,8 +38,7 @@ router.get('/', function(req, res) {
   res.json({message: 'Connecting to GServ API'});
 });
 
-var usersRoute = router.route('/users');
-usersRoute.get(function(req, res) {
+router.get('/users', function(req, res) {
   console.log('in the users route. trying to get all the users');
   User.find(function(err, users) {
     if err {
