@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/Ragnyll/GServ#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "mongodb": "^2.2.11",
+    "mongoose": "^4.6.8"
   }
 }

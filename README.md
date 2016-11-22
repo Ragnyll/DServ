@@ -16,6 +16,13 @@ Before any software is installed on the Pi make sure the file system is expanded
 
 `npm install`
 
+**note if mongodb is not installed correctly with npm then it will need to be
+installed with `sudo apt-get install mongodb-server`**
+
+create a /data directory in the root project directory with `mkdir /data` and
+point mongodb at /data with `mongod --dbpath=/data`.
+
+
 Runs off nginx to make port externally accessible. Install nginx with
 `sudo apt-get install nginx` and start with `sudo service nginx start`
 
