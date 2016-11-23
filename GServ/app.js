@@ -4,8 +4,6 @@ var mongoose = require('mongoose');
 var Beer = require('../models/beer');
 var port = process.env.PORT || 3000; // use environment port or just default to 3000
 
-var router = express.Router(); // route everyting through router
-
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({
   extended: true
@@ -39,7 +37,13 @@ db.once('open', function() {
   }
 });
 
+var router = express.Router(); // route everyting through router
 app.use('/api', router); // router sits at the /api extension
+// middleware for all requests
+router.use(function(req, res, next){
+  console.log('Received a request');
+  next();
+});
 
 router.get('/', function(req, res) {
   res.json({message: 'Connected to GServ API'});
