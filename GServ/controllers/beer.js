@@ -1,4 +1,4 @@
-var Beer = require('../models/beer');
+var Beer = require('../../models/beer');
 
 exports.postBeers = function(req, res) {
   var beer = new Beer();
