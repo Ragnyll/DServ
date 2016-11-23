@@ -6,6 +6,8 @@ mongoose.Promise = require('bluebird');
 mongoose.Promise = require('q').Promise;
 var beerController = require('./controllers/beer');
 var userController = require('./controllers/user');
+var passport = require('passport');
+var authController = require('./controllers/auth');
 var port = process.env.PORT || 3000; // use environment port or just default to 3000
 
 var bodyParser = require('body-parser');
@@ -13,7 +15,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
-
+app.use(passport.initialize());
 // connect to mongodb
 // TODO: add a keep alive to prevent connection closed
 mongoose.connect('mongodb://localhost:27017/users', function(err) {
@@ -57,16 +59,16 @@ router.get('/', function(req, res) {
 
 router.route('/users')
   .post(userController.postUsers)
-  .get(userController.getUsers);
-  
+  .get(authController.isAuthenticated, userController.getUsers);
+
 router.route('/beers')
-  .post(beerController.postBeers)
-  .get(beerController.getBeers);
+  .post(authController.isAuthenticated, beerController.postBeers)
+  .get(authController.isAuthenticated, beerController.getBeers);
 
 router.route('/beers/:beer_id')
-  .get(beerController.getBeer)
-  .put(beerController.putBeer)
-  .delete(beerController.deleteBeer);
+  .get(authController.isAuthenticated, beerController.getBeer)
+  .put(authController.isAuthenticated, beerController.putBeer)
+  .delete(authController.isAuthenticated, beerController.deleteBeer);
 
 // Get that server kickin
 app.listen(port, function() {
