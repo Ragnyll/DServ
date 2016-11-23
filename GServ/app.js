@@ -1,14 +1,14 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var Beer = require('../models/beer');
-var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
 var port = process.env.PORT || 3000; // use environment port or just default to 3000
 var app = express();
 var router = express.Router(); // route everyting through router
 
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 // connect to mongodb. if it doesnt connecct after 10 seconds just quit
 // TODO: add a keep alive to prevent connection closed
 mongoose.connect('mongodb://localhost:27017/users', function(err) {
