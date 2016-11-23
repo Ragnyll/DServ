@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
+var Promise = require('bluebird');
 var Beer = require('../models/beer');
 var port = process.env.PORT || 3000; // use environment port or just default to 3000
 
