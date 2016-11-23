@@ -50,7 +50,7 @@ router.get('/', function(req, res) {
 });
 
 var beersRoute = router.route('/beers');
-router.post(function(req, res) {
+beersRoute.post(function(req, res) {
   console.log('in the beers route. trying to get all the users');
 
   var beer = new Beer();
