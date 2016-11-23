@@ -10,12 +10,13 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-// connect to mongodb. if it doesnt connecct after 10 seconds just quit
+app.use(bodyParser.json());
+
+// connect to mongodb
 // TODO: add a keep alive to prevent connection closed
 mongoose.connect('mongodb://localhost:27017/users', function(err) {
   if (err) throw err;
 });
-
 // make sure that mongoose was able to connect
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -41,7 +42,7 @@ db.once('open', function() {
 app.use('/api', router); // router sits at the /api extension
 
 router.get('/', function(req, res) {
-  res.json({message: 'Connecting to GServ API'});
+  res.json({message: 'Connected to GServ API'});
 });
 
 var beersRoute = router.route('/beers');
@@ -52,7 +53,7 @@ router.post(function(req, res) {
   beer.name = req.body.name;
   beer.type = req.body.type;
   beer.quantity = req.body.quantity;
-
+  console.log('saved beer variables');
   beer.save(function(err) {
     if (err) {
       res.send(err);
