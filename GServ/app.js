@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 mongoose.Promise = require('q').Promise;
 var beerController = require('./controllers/beer');
+var userController = require('./controllers/user');
 var port = process.env.PORT || 3000; // use environment port or just default to 3000
 
 var bodyParser = require('body-parser');
@@ -54,6 +55,10 @@ router.get('/', function(req, res) {
   });
 });
 
+router.route('/users')
+  .post(userController.postUsers)
+  .get(userController.getUsers);
+  
 router.route('/beers')
   .post(beerController.postBeers)
   .get(beerController.getBeers);
