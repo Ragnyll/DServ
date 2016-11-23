@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 mongoose.Promise = require('q').Promise;
 var beerController = require('../controllers/beer');
+var userController = require('../')
 var port = process.env.PORT || 3000; // use environment port or just default to 3000
 
 var bodyParser = require('body-parser');
