@@ -1,6 +1,10 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var Users = require('../models/users');
+var Beer = require('../models/beer');
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 var port = process.env.PORT || 3000; // use environment port or just default to 3000
 var app = express();
 var router = express.Router(); // route everyting through router
@@ -10,6 +14,7 @@ var router = express.Router(); // route everyting through router
 mongoose.connect('mongodb://localhost:27017/users', function(err) {
   if (err) throw err;
 });
+
 // make sure that mongoose was able to connect
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -38,30 +43,22 @@ router.get('/', function(req, res) {
   res.json({message: 'Connecting to GServ API'});
 });
 
-router.get('/users', function(req, res) {
-  console.log('in the users route. trying to get all the users');
-  User.find(function(err, users) {
+var beersRoute = router.route('/beers');
+router.post(function(req, res) {
+  console.log('in the beers route. trying to get all the users');
+
+  var beer = new Beer();
+  beer.name = req.body.name;
+  beer.type = req.body.type;
+  beer.quantity = req.body.quantity;
+
+  beer.save(function(err) {
     if (err) {
       res.send(err);
     }
-    res.json(users);
-  })
+    res.json({message: 'success!', data: beer});
+  });
 });
-// usersRoute.post(function(req, res) {
-//   var user = new User();
-//
-//   user.name = 'jim';
-//   user.password = 'duck';
-//   user.other = 'no';
-//
-//   user.save(function(err) {
-//     if (err) {
-//       res.send(err);
-//       console.log('problem saving the result of the POST request');
-//     }
-//     res.json({message: 'your user was created', data: user });
-//   });
-// });
 
 // Get that server kickin
 app.listen(port, function() {
