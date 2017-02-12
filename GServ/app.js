@@ -67,7 +67,7 @@ router.route('/beers')
   .get(authController.isAuthenticated, beerController.getBeers);
 
 router.route('/clients')
-  .post(authController.isAuthenticated, clientController.postClients);
+  .post(authController.isAuthenticated, clientController.postClients)
   .get(authController.isAuthenticated, clientController.getClients);
 router.route('/beers/:beer_id')
   .get(authController.isAuthenticated, beerController.getBeer)
