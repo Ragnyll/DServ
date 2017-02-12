@@ -1,8 +1,3 @@
-
-63
-64
-65
-66
 // Load required packages
 var Beer = require('../models/beer');
 

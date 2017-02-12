@@ -6,6 +6,7 @@ mongoose.Promise = require('bluebird');
 mongoose.Promise = require('q').Promise;
 var beerController = require('./controllers/beer');
 var userController = require('./controllers/user');
+var clientController = require('./controllers/client');
 var passport = require('passport');
 var authController = require('./controllers/auth');
 var port = process.env.PORT || 3000; // use environment port or just default to 3000
@@ -65,10 +66,14 @@ router.route('/beers')
   .post(authController.isAuthenticated, beerController.postBeers)
   .get(authController.isAuthenticated, beerController.getBeers);
 
+router.route('/clients')
+  .post(authController.isAuthenticated, clientController.postClients);
+  .get(authController.isAuthenticated, clientController.getClients);
 router.route('/beers/:beer_id')
   .get(authController.isAuthenticated, beerController.getBeer)
   .put(authController.isAuthenticated, beerController.putBeer)
   .delete(authController.isAuthenticated, beerController.deleteBeer);
+
 
 // Get that server kickin
 app.listen(port, function() {
