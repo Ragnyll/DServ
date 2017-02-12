@@ -1,5 +1,5 @@
 // Load required packages
-var Client = require('../models/client');
+var Client = require('../../models/client');
 
 // Create endpoint /api/client for POST
 exports.postClients = function(req, res) {

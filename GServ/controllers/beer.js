@@ -1,5 +1,5 @@
 // Load required packages
-var Beer = require('../models/beer');
+var Beer = require('../../models/beer');
 
 // Create endpoint /api/beers for POST
 exports.postBeers = function(req, res) {
